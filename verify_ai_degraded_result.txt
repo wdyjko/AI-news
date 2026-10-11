@@ -1,0 +1,25 @@
+========================================================================================
+### A. 未配置 LLM_API_KEY（纯降级）
+========================================================================================
+  HEALTH {"llm_enabled": false, "model": "deepseek-v4-flash", "base_url": "https://vyceai.com/v1", "mode": "degraded(未配置 LLM_API_KEY)"}
+  HTTP message = 大模型降级摘要
+  cached = False  degraded = True
+  summary = 詹姆斯生涯第四冠
+  degrade_reason = 未配置 LLM_API_KEY（纯检索降级模式）
+  notice = （当前为大模型降级摘要：直接摘录原文，未做语义提炼）
+  first_call_ms = 2018.4
+  second call: cached = True  client_ms = 3.2
+  => 降级结果已缓存
+
+========================================================================================
+### B. Key 无效（上游返回 401，验证失败降级）
+========================================================================================
+  HEALTH {"llm_enabled": true, "model": "deepseek-v4-flash", "base_url": "https://vyceai.com/v1", "mode": "llm"}
+  HTTP message = 大模型降级摘要
+  cached = False  degraded = True
+  summary = 詹姆斯生涯第四冠
+  degrade_reason = HTTP 401: Invalid API key.
+  notice = （当前为大模型降级摘要：直接摘录原文，未做语义提炼）
+  first_call_ms = 4685.4
+  second call: cached = True  client_ms = 2.9
+  => 降级结果已缓存
